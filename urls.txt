@@ -1,0 +1,12 @@
+URL --------- Screen/State
+
+/             create account page
+/login        login page
+/dashboard    dashboard page
+
+/recover      recover password page
+/users/:user_id    user profile
+
+/users/:id
+/users/:id/following
+          /followers
