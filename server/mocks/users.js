@@ -9,15 +9,19 @@ module.exports = function(app) {
   });
 
   usersRouter.post('/', function(req, res) {
-    res.status(201).end();
+    var user = { id: 1, name: req.body.user.name, email: req.body.user.email }
+    console.log('received operation: ' + req.body.user.meta.operation);
+    console.log('saving user');
+    console.log('setting password to ' + req.body.user.meta.password);
+    res.status(201).send({ user: user, token: 'secret' });
   });
 
   usersRouter.get('/:id', function(req, res) {
     var users = {
-      '1': { id: 1, firstName: 'Jon', lastName: 'Snow', email: 'jonsnow@gmail.com' },
-      '2': { id: 2, firstName: 'Tyrion', lastName: 'Lannister', email: 'tyrionlannister@gmail.com' },
-      '3': { id: 3, firstName: 'Petyr', lastName: 'Baelish', email: 'petyrbaelish@gmail.com' },
-      '4': { id: 4, firstName: 'Ned', lastName: 'Stark', email: 'nedstark@gmail.com' },
+      '1': { id: 1, name: 'Jon Snow', email: 'jonsnow@gmail.com' },
+      '2': { id: 2, name: 'Tyrion Lannister', email: 'tyrionlannister@gmail.com' },
+      '3': { id: 3, name: 'Petyr Baelish', email: 'petyrbaelish@gmail.com' },
+      '4': { id: 4, name: 'Ned Stark', email: 'nedstark@gmail.com' },
     };
     res.send({
       'user': users[req.params.id]
