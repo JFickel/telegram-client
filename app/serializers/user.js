@@ -5,8 +5,8 @@ export default DS.RESTSerializer.extend({
     var data = this._super(record, options);
 
     data.meta = {
-      operation: record.get('operation'),
-      password: record.get('password')
+      operation: record.get('meta.operation'),
+      password: record.get('meta.password')
     };
 
     return data;

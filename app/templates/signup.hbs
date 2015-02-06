@@ -2,7 +2,11 @@
 
 <form {{action 'signup' on='submit'}}>
   <div>{{input value=name placeholder="Enter your name..."}}</div>
-  <div>{{input value=username placeholder="Enter your email..."}}</div>
+  {{errors.name}}
+  <div>{{input value=email placeholder="Enter your email..."}}</div>
+  {{errors.email}}
   <div>{{input type='password' value=password placeholder="Enter your password..."}}</div>
+  {{errors.password}}
+
   <button type='submit'>Sign Up</button>
 </form>

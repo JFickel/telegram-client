@@ -1,13 +1,16 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(EmberValidations.Mixin, {
   actions: {
     signup: function() {
       var user = this.store.createRecord('user', {
         name: this.get('name'),
         email: this.get('email'),
-        password: this.get('password'),
-        operation: 'login',
+        meta: {
+          password: this.get('password'),
+          operation: 'signup'
+        }
       });
 
       user.save().then(user => {
@@ -20,6 +23,19 @@ export default Ember.Controller.extend({
       }, response => {
         console.log(response);
       });
+    }
+  },
+  validations: {
+    name: {
+      presence: true,
+      length: { minimum: 2, messages: { tooShort: 'name must be at least 2 characters' }}
+    },
+    password: {
+      presence: true,
+      length: { minimum: 8, messages: { tooShort: 'password must be at least 8 characters' }}
+    },
+    email: {
+      email: true
     }
   }
 });

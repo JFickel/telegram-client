@@ -4,7 +4,8 @@ var attr = DS.attr;
 var User = DS.Model.extend({
   name: attr('string'),
   email: attr('string'),
-  avatar: attr('string')
+  avatar: attr('string'),
+  authenticated: attr('boolean')
 });
 
 export default User;
