@@ -9,11 +9,11 @@ module.exports = function(app) {
   });
 
   usersRouter.post('/', function(req, res) {
-    var user = { id: 1, name: req.body.user.name, email: req.body.user.email }
+    var user = { id: 420, name: req.body.user.name, email: req.body.user.email, authenticated: true };
     console.log('received operation: ' + req.body.user.meta.operation);
     console.log('saving user');
     console.log('setting password to ' + req.body.user.meta.password);
-    res.status(201).send({ user: user, token: 'secret' });
+    res.status(201).send({ user: user });
   });
 
   usersRouter.get('/:id', function(req, res) {

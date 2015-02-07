@@ -15,14 +15,16 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         }
       });
 
-      if (this.get('errors')) {
-        this.set('displayErrors', true);
-      } else {
+      if (this.get('isValid')) {
         user.save().then(user => {
+          this.set('sessionService.user', user);
+          localStorage.user = JSON.stringify(user.toJSON({ includeId: true }));
           this.transitionToRoute('dashboard');
         }, response => {
           console.log(response);
         });
+      } else {
+        this.set('displayErrors', true);
       }
     }
   },
