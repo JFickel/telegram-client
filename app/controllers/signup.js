@@ -2,6 +2,8 @@ import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Controller.extend(EmberValidations.Mixin, {
+  displayErrors: false,
+
   actions: {
     signup: function() {
       var user = this.store.createRecord('user', {
@@ -13,16 +15,15 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
         }
       });
 
-      user.save().then(user => {
-        user.set('password', '');
-        // should the token be an attribute on user
-        // or is there a way of getting it from the json?
-        // this.set('session.token', ???)
-        console.log(user);
-        this.transitionToRoute('dashboard');
-      }, response => {
-        console.log(response);
-      });
+      if (this.get('errors')) {
+        this.set('displayErrors', true);
+      } else {
+        user.save().then(user => {
+          this.transitionToRoute('dashboard');
+        }, response => {
+          console.log(response);
+        });
+      }
     }
   },
   validations: {
