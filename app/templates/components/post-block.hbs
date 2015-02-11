@@ -1,4 +1,19 @@
-<h3>{{#link-to 'user' post.user }}{{post.user.name}}{{/link-to}}</h3>
-<div>{{post.body}}</div>
-<div>{{moment post.createdAt}}</div>
-<a href {{action 'deletePost'}}>Delete</a>
+<div class="post-block clearfix">
+  <a class="avatar link"><img src="img/avatar-red.png"/></a>
+
+  <div class="content">
+    <div class="author">{{#link-to 'user' post.user }}{{post.user.name}}{{/link-to}}</div>
+    <div class="text">{{post.body}}</div>
+    <div class="footer">
+      <span class="timestamp">{{moment post.createdAt}}</span>
+      <span class="middot">&middot;</span>
+      <a class="blue-link">Repost</a>
+      <span class="middot">&middot;</span>
+      <a href class="blue-link" {{action 'deletePost'}}>Delete</a>
+    </div>
+  </div>
+</div>
+
+<h3></h3>
+<div></div>
+<div></div>

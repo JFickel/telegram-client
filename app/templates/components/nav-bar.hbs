@@ -1,5 +1,23 @@
-<nav>
-  {{#link-to 'signup'}}Home{{/link-to}}
-  {{#link-to 'signup'}}Telegram{{/link-to}}
-  {{#link-to 'user' session.user}}{{session.user.avatar}}{{session.user.name}}{{/link-to}}
-</nav>
+<div class="nav-bar clearfix">
+  <div class="third">
+    <div class="home relative-center-y">
+
+      {{#link-to 'welcome' class="title dark-gray-link"}}<img class="icon" src="img/icon-home.png"/>{{/link-to}}
+      {{#link-to 'welcome' class="title dark-gray-link"}}Home{{/link-to}}
+    </div>
+  </div>
+
+  <div class="third">
+    <img class="relative-center-xy" src="img/telegram-logo-small.png"/>
+  </div>
+
+  <div class="third">
+    <div class="user relative-center-y">
+      {{#link-to 'user' session.user}}
+        <a class="avatar link"><img src="img/avatar-turquoise.png"/></a>
+        <a class="name dark-gray-link">Cristian Strat</a>
+        <a class="logout dark-gray-link">Log out</a>
+      {{/link-to}}
+    </div>
+  </div>
+</div>

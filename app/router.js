@@ -6,8 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('signup', { path: '/' });
-  this.route('login');
+  this.route('welcome', { path: '/' });
   this.route('dashboard');
   this.route('recover');
   this.resource('user', { path: '/users/:user_id' }, function () {

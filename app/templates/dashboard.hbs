@@ -1,3 +1,17 @@
-{{#each post in this}}
-  {{post-block post=post}}
-{{/each}}
+<div class="dashboard">
+  <div class="create-post">
+    <textarea placeholder="What's happening?" autofocus="autofocus"></textarea>
+    <div class="footer clearfix">
+      <div class="characters-left">140 characters</div>
+      <div class="publish dark-gray-btn">Publish</div>
+    </div>
+  </div>
+
+  <div class="title">Latest posts</div>
+
+  <div class="posts-list">
+    {{#each post in this}}
+      {{post-block post=post}}
+    {{/each}}
+  </div>
+</div>

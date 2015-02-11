@@ -1,0 +1,18 @@
+<h3>New? Sign Up!</h3>
+<form class="auth-form" {{action 'signup' on='submit'}}>
+  {{input value=name placeholder="Enter your name..." class="auth-input"}}
+  {{#if displayErrors}}
+    {{errors.name}}
+  {{/if}}
+  {{input value=email placeholder="Enter your email..." class="auth-input"}}
+  {{#if displayErrors}}
+    {{errors.email}}
+  {{/if}}
+  {{input type='password' value=password placeholder="Enter your password..." class="auth-input"}}
+  {{#if displayErrors}}
+    {{errors.password}}
+  {{/if}}
+  <div class="form-footer clearfix">
+    <button type='submit' class='blue-btn submit'>Sign Up</button>
+  </div>
+</form>
