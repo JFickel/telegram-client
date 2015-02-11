@@ -1,6 +1,6 @@
 export function initialize(container, application) {
-  application.inject('route', 'sessionService', 'service:session');
-  application.inject('controller', 'sessionService', 'service:session');
+  application.inject('route', 'session', 'service:session');
+  application.inject('controller', 'session', 'service:session');
 }
 
 export default {

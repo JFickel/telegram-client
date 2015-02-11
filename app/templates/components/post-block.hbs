@@ -1,0 +1,4 @@
+<h3>{{#link-to 'user' post.user }}{{post.user.name}}{{/link-to}}</h3>
+<div>{{post.body}}</div>
+<div>{{moment post.createdAt}}</div>
+<a href {{action 'deletePost'}}>Delete</a>

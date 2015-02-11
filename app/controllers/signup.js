@@ -2,6 +2,10 @@ import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Controller.extend(EmberValidations.Mixin, {
+  name: null,
+  password: null,
+  email: null,
+
   displayErrors: false,
 
   actions: {
@@ -17,7 +21,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
       if (this.get('isValid')) {
         user.save().then(user => {
-          this.set('sessionService.user', user);
+          this.set('session.user', user);
           localStorage.user = JSON.stringify(user.toJSON({ includeId: true }));
           this.transitionToRoute('dashboard');
         }, response => {
