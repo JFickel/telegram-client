@@ -15,9 +15,10 @@
     <div class="user relative-center-y">
       {{#link-to 'user' session.user}}
         <a class="avatar link"><img src="img/avatar-turquoise.png"/></a>
-        <a class="name dark-gray-link">Cristian Strat</a>
-        <a class="logout dark-gray-link">Log out</a>
+        <a class="name dark-gray-link">{{session.user.name}}</a>
       {{/link-to}}
+      <button {{action 'logout'}}>wat</button>
+      <a class="logout dark-gray-link" {{action 'logout'}}>Log out</a>
     </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ export default Ember.Component.extend(EmberValidations.Mixin, {
             operation: 'signup'
           }
         };
-        this.sendAction('action', signUpData)
+        this.sendAction('action', signUpData);
       } else {
         this.set('displayErrors', true);
       }

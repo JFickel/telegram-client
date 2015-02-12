@@ -14,6 +14,7 @@ Router.map(function() {
     this.route('following');
     this.route('followers');
   });
+  this.route('modelNotFound', { path: '404'});
 });
 
 export default Router;

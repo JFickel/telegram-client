@@ -29,9 +29,14 @@ module.exports = function(app) {
       '3': { id: 3, name: 'Petyr Baelish', email: 'petyrbaelish@gmail.com' },
       '4': { id: 4, name: 'Ned Stark', email: 'nedstark@gmail.com' }
     };
-    res.send({
-      'user': users[req.params.id]
-    });
+    
+    if (users[req.params.id]) {
+      res.send({
+        'user': users[req.params.id]
+      });
+    } else {
+      res.status(404).send();
+    }
   });
 
   usersRouter.put('/:id', function(req, res) {
