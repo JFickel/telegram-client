@@ -29,7 +29,7 @@ module.exports = function(app) {
       '3': { id: 3, name: 'Petyr Baelish', email: 'petyrbaelish@gmail.com' },
       '4': { id: 4, name: 'Ned Stark', email: 'nedstark@gmail.com' }
     };
-    
+
     if (users[req.params.id]) {
       res.send({
         'user': users[req.params.id]
@@ -48,6 +48,7 @@ module.exports = function(app) {
   });
 
   usersRouter.delete('/:id', function(req, res) {
+    user = null;
     res.status(204).end();
   });
 
