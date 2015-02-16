@@ -1,0 +1,17 @@
+<div class="user-block clearfix">
+  <a class="avatar link">
+    <img src="img/avatar-red.png"/>
+  </a>
+  <div class="name">
+    <a class="link">{{user.name}}</a>
+  </div>
+  {{#if user.followedByCurrentUser}}
+    <button class="blue-btn follow relative-center-y" {{action 'unfollow' user}}>
+      Unfollow
+    </button>
+  {{else}}
+    <button class="blue-btn follow relative-center-y" {{action 'follow' user}}>
+      Follow
+    </button>
+  {{/if}}
+</div>

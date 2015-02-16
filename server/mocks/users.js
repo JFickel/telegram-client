@@ -2,34 +2,52 @@ module.exports = function(app) {
   var express = require('express'),
       usersRouter = express.Router(),
       user = null,
-      json;
+      payload,
+      users = {
+        '1': { id: 1, name: 'Jon Snow', email: 'jonsnow@gmail.com' },
+        '2': { id: 2, name: 'Tyrion Lannister', email: 'tyrionlannister@gmail.com', followedByCurrentUser: true },
+        '3': { id: 3, name: 'Petyr Baelish', email: 'petyrbaelish@gmail.com', followedByCurrentUser: true },
+        '4': { id: 4, name: 'Ned Stark', email: 'nedstark@gmail.com' }
+      };
 
 
   usersRouter.get('/', function(req, res) {
+    var key, usersArray, following;
+
     if (req.query.authenticated && user != null) {
-      json = { 'users': [user] };
+      payload = { 'users': [user] };
+    } else if (req.query.following) {
+      usersArray = [];
+      for (key in users) {
+        usersArray.push(users[key]);
+      }
+      following = usersArray.filter(function(user) {
+        return user.followedByCurrentUser === true;
+      });
+      payload = { 'users': following };
+    } else if (req.query.followers) {
+      usersArray = []
+      for (key in users) {
+        usersArray.push(users[key]);
+      }
+
+      payload = { 'users': usersArray }
     } else {
-      json = { 'users': [] }
+      payload = { 'users': [] };
     }
-    res.send(json);
+    res.send(payload);
   });
 
   usersRouter.post('/', function(req, res) {
-    user = { id: 420, name: req.body.user.name, email: req.body.user.email, authenticated: true };
-    console.log('received operation: ' + req.body.user.meta.operation);
-    console.log('saving user');
-    console.log('setting password to ' + req.body.user.meta.password);
-    res.status(201).send({ user: user });
+    if (req.body.user.meta.operation === 'signup') {
+      user = { id: 420, name: req.body.user.name, email: req.body.user.email, authenticated: true };
+      payload = { user: user };
+    }
+
+    res.status(201).send(payload);
   });
 
   usersRouter.get('/:id', function(req, res) {
-    var users = {
-      '1': { id: 1, name: 'Jon Snow', email: 'jonsnow@gmail.com' },
-      '2': { id: 2, name: 'Tyrion Lannister', email: 'tyrionlannister@gmail.com' },
-      '3': { id: 3, name: 'Petyr Baelish', email: 'petyrbaelish@gmail.com' },
-      '4': { id: 4, name: 'Ned Stark', email: 'nedstark@gmail.com' }
-    };
-
     if (users[req.params.id]) {
       res.send({
         'user': users[req.params.id]
@@ -40,10 +58,9 @@ module.exports = function(app) {
   });
 
   usersRouter.put('/:id', function(req, res) {
+    users[req.body.user.id].followedByCurrentUser = req.body.user.followedByCurrentUser;
     res.send({
-      'users': {
-        id: req.params.id
-      }
+      'users': [users[req.body.user.id]]
     });
   });
 

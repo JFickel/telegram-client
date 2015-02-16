@@ -1,7 +1,7 @@
 import Ember from 'ember';
-// import Authenticated from './mixins/authenticated';
+import Authenticated from 'telegram-client/mixins/authenticated';
 
-export default Ember.Route.extend(/** Authenticated **/ , {
+export default Ember.Route.extend(Authenticated, {
   model: function() {
     return this.store.find('post', { dashboard: true });
   }
