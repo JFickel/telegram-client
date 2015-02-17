@@ -6,11 +6,11 @@
     <a class="link">{{user.name}}</a>
   </div>
   {{#if user.followedByCurrentUser}}
-    <button class="blue-btn follow relative-center-y" {{action 'unfollow' user}}>
+    <button class="blue-btn follow relative-center-y" {{action 'unfollow'}}>
       Unfollow
     </button>
   {{else}}
-    <button class="blue-btn follow relative-center-y" {{action 'follow' user}}>
+    <button class="blue-btn follow relative-center-y" {{action 'follow'}}>
       Follow
     </button>
   {{/if}}
