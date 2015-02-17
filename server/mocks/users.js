@@ -58,9 +58,9 @@ module.exports = function(app) {
   });
 
   usersRouter.put('/:id', function(req, res) {
-    users[req.body.user.id].followedByCurrentUser = req.body.user.followedByCurrentUser;
+    users[req.params.id].followedByCurrentUser = req.body.user.followedByCurrentUser;
     res.send({
-      'users': [users[req.body.user.id]]
+      'user': users[req.body.user.id]
     });
   });
 
