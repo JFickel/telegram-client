@@ -5,7 +5,7 @@ var Post = DS.Model.extend({
   body: attr('string'),
   user: DS.belongsTo('user', { async: true }),
   createdAt: attr('date'),
-  repost: DS.belongsTo('post', { async: true })
+  repost: DS.belongsTo('user', { async: true })
 });
 
 export default Post;

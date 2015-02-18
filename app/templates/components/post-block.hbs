@@ -2,12 +2,15 @@
   <a class="avatar link"><img src="img/avatar-red.png"/></a>
 
   <div class="content">
+    <div>{{#if post.repost}}THIS IS A REPOST OF {{post.repost.name}}{{/if}}</div>
     <div class="author">{{#link-to 'user' post.user }}{{post.user.name}}{{/link-to}}</div>
     <div class="text">{{post.body}}</div>
     <div class="footer">
       <span class="timestamp">{{ago post.createdAt}}</span>
       <span class="middot">&middot;</span>
-      <a class="blue-link" {{action 'repost'}}>Repost</a>
+      {{#if repostable}}
+        <a class="blue-link" {{action 'repost'}}>Repost</a>
+      {{/if}}
       <span class="middot">&middot;</span>
       <a href class="blue-link" {{action 'deletePost'}}>Delete</a>
     </div>
