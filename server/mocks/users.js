@@ -20,10 +20,27 @@ module.exports = function(app) {
         usersArray.push(users[key]);
       }
 
-      payload = usersArray.filter(function(user) {
+      authenticatedUser = usersArray.filter(function(user) {
         return user.authenticated === true;
       });
-      payload = { 'users': payload };
+      payload = { 'users': authenticatedUser };
+
+    } else if (req.query.login) {
+      usersArray = [];
+      for (key in users) {
+        usersArray.push(users[key]);
+      }
+      authenticatedUser = usersArray.filter(function(user) {
+        return user.email === req.query.email && user.password === req.query.password;
+      });
+      console.log(authenticatedUser);
+      if (authenticatedUser) {
+        payload = { 'users': authenticatedUser}
+      } else {
+        // error
+        payload = null
+      }
+
     } else if (req.query.following) {
       usersArray = [];
       for (key in users) {
@@ -33,6 +50,7 @@ module.exports = function(app) {
         return user.followedByCurrentUser === true;
       });
       payload = { 'users': following };
+
     } else if (req.query.followers) {
       usersArray = []
       for (key in users) {
@@ -40,8 +58,8 @@ module.exports = function(app) {
           usersArray.push(users[key]);
         }
       }
+      payload = { 'users': usersArray };
 
-      payload = { 'users': usersArray }
     } else {
       payload = { 'users': [] };
     }
@@ -50,7 +68,11 @@ module.exports = function(app) {
 
   usersRouter.post('/', function(req, res) {
     if (req.body.user.meta.operation === 'signup') {
-      user = { id: 420, name: req.body.user.name, email: req.body.user.email, authenticated: true };
+      user = { id: 420,
+               name: req.body.user.name,
+               email: req.body.user.email,
+               password: req.body.user.meta.password,
+               authenticated: true };
       users[420] = user;
       payload = { user: user };
     }

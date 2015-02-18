@@ -1,9 +1,21 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(EmberValidations.Mixin,{
   actions: {
     login: function() {
-      
+      var loginData;
+
+      if (this.get('isValid')) {
+        loginData = {
+          email: this.get('email'),
+          password: this.get('password')
+        };
+
+        this.sendAction('action', loginData);
+      } else {
+        this.set('displayErrors', true);
+      }
     }
   },
 

@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     logout: function() {
-      console.log('???');
       var controller = this;
       var user = this.get('session.user');
       user.set('meta', { operation: 'logout' });
