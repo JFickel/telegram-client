@@ -7,12 +7,14 @@
     <div class="text">{{post.body}}</div>
     <div class="footer">
       <span class="timestamp">{{ago post.createdAt}}</span>
-      <span class="middot">&middot;</span>
       {{#if repostable}}
+        <span class="middot">&middot;</span>
         <a class="blue-link" {{action 'repost'}}>Repost</a>
       {{/if}}
-      <span class="middot">&middot;</span>
-      <a href class="blue-link" {{action 'deletePost'}}>Delete</a>
+      {{#if deletable}}
+        <span class="middot">&middot;</span>
+        <a href class="blue-link" {{action 'deletePost'}}>Delete</a>
+      {{/if}}
     </div>
   </div>
 </div>

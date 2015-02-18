@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   message: null,
   sortProperties: ['createdAt'],
-  sortAscending: true,
+  sortAscending: false,
 
   actions: {
     publish: function() {
@@ -35,8 +35,13 @@ export default Ember.ArrayController.extend({
       // if this is a repost of a repost, the repost will be set
       // to the reposter and not the original poster
 
-      // it's probably better to set the repost attr to the original post
+      // I think it's better to set the repost attr to the original post
       // instead of a user and have all reposts refer to the original
+      // you'd need to have a repostedAt attr, but there'd be a conflict
+      // between sorting createdAt and repostedAt — how is that handled?
+      // you'd want to sort by createdAt if it's not a repost and
+      // repostedAt if it's a repost
+
       post.setProperties({
         createdAt: originalPost.get('createdAt'),
         user: this.get('session.user'),
