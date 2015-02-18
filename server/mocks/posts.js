@@ -16,19 +16,21 @@ module.exports = function(app) {
     }
 
     if (req.query.profile) {
-      posts = posts.filter(function(post) {
-        return post.user === 420;
+      payload = posts.filter(function(post) {
+        return post.user === parseInt(req.query.userId);
       });
     }
 
-    res.send({posts: posts});
+    res.send({posts: payload});
   });
 
   postsRouter.post('/', function(req, res) {
-    var post = req.body.post;
-    post.id = posts[posts.length - 1] + 1;
+    var post = req.body.post,
+        idCounter = 5;
+
+    post.id = ++idCounter;
     posts.push(req.body.post);
-    res.status(201).end();
+    res.status(201).send({ 'post': post });
   });
 
   postsRouter.get('/:id', function(req, res) {
@@ -48,6 +50,9 @@ module.exports = function(app) {
   });
 
   postsRouter.delete('/:id', function(req, res) {
+    posts = posts.filter(function(post) {
+      return post.id != req.params.id
+    });
     res.status(204).end();
   });
 

@@ -5,7 +5,7 @@
     <div class="author">{{#link-to 'user' post.user }}{{post.user.name}}{{/link-to}}</div>
     <div class="text">{{post.body}}</div>
     <div class="footer">
-      <span class="timestamp">{{moment post.createdAt}}</span>
+      <span class="timestamp">{{ago post.createdAt}}</span>
       <span class="middot">&middot;</span>
       <a class="blue-link">Repost</a>
       <span class="middot">&middot;</span>
