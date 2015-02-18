@@ -22,6 +22,17 @@ export default Ember.ArrayController.extend({
       post.destroyRecord().then(() => {
         this.get('model').removeObject(post);
       });
+    },
+
+    repost: function(originalPost) {
+      var post = this.store.createRecord('post', originalPost.toJSON());
+      post.setProperties({
+        user: this.get('session.user.id'),
+        repost: originalPost.get('user')
+      });
+      post.save().then((post) => {
+        this.get('model').addObject(post);
+      });
     }
   }
 });

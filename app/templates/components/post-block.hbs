@@ -7,7 +7,7 @@
     <div class="footer">
       <span class="timestamp">{{ago post.createdAt}}</span>
       <span class="middot">&middot;</span>
-      <a class="blue-link">Repost</a>
+      <a class="blue-link" {{action 'repost'}}>Repost</a>
       <span class="middot">&middot;</span>
       <a href class="blue-link" {{action 'deletePost'}}>Delete</a>
     </div>

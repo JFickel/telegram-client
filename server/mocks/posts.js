@@ -12,7 +12,7 @@ module.exports = function(app) {
 
   postsRouter.get('/', function(req, res) {
     if (req.query.dashboard) {
-      // grab posts of users followed by the current user and current user's posts
+      payload = posts;
     }
 
     if (req.query.profile) {

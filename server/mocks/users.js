@@ -15,7 +15,15 @@ module.exports = function(app) {
     var key, usersArray, following;
 
     if (req.query.authenticated && user != null) {
-      payload = { 'users': [user] };
+      usersArray = [];
+      for (key in users) {
+        usersArray.push(users[key]);
+      }
+
+      payload = usersArray.filter(function(user) {
+        return user.authenticated === true;
+      });
+      payload = { 'users': payload };
     } else if (req.query.following) {
       usersArray = [];
       for (key in users) {
