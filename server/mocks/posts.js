@@ -11,12 +11,15 @@ module.exports = function(app) {
   ]
 
   postsRouter.get('/', function(req, res) {
+    console.log(req.query.searchQuery);
     if (req.query.dashboard) {
       payload = posts;
-    } else if (req.query.searchQuery) {
-      console.log(req.query.searchQuery);
-
+    } else if (req.query.hasOwnProperty("searchQuery")) {
       payload = posts.filter(function(post) {
+        // console.log(req.query.searchQuery.toLowerCase());
+        // console.log(post.body.toLowerCase());
+        // console.log(post.body.toLowerCase().indexOf(req.query.searchQuery.toLowerCase()));
+
         if (post.body.toLowerCase().indexOf(req.query.searchQuery.toLowerCase()) !== -1) {
           return true
         }

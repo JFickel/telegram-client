@@ -9,7 +9,13 @@ export default Ember.Route.extend(Authenticated, {
   },
 
   model: function(params) {
+    console.log(params);
     return this.store.find('post', params);
+  },
+
+  deactivate: function() {
+    this.controllerFor('application').set('searchQuery', '');
+    this.controllerFor('search').set('searchQuery', '');
   }
 
 });
