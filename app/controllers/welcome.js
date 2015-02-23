@@ -7,12 +7,13 @@ export default Ember.Controller.extend({
       // debugger;
       loginData.login = true;
       this.store.find('user', loginData).then(function(users) {
-
         var user = (users || []).get('firstObject');
-        console.log(user)
         self.set('session.user', user);
-        console.log(self.get('session.user'))
-        self.transitionToRoute('dashboard');
+        if (this.get('session.attemptedTransition')) {
+          self.get('session.attemptedTransition').retry();
+        } else {
+          self.transitionToRoute('dashboard');
+        }
       });
     },
 

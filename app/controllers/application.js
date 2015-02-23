@@ -12,6 +12,10 @@ export default Ember.Controller.extend({
         controller.store.unloadAll('post');
         controller.transitionToRoute('welcome');
       });
+    },
+
+    search: function(searchQuery) {
+      this.transitionToRoute('search', { queryParams: { searchQuery: searchQuery }});
     }
   }
 });

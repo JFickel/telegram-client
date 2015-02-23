@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('welcome', { path: '/' });
   this.route('dashboard');
   this.route('recover');
+  this.route('search');
   this.resource('user', { path: '/users/:user_id' }, function () {
     this.route('posts', { path: '/' });
     this.route('following');

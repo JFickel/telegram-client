@@ -13,14 +13,22 @@ module.exports = function(app) {
   postsRouter.get('/', function(req, res) {
     if (req.query.dashboard) {
       payload = posts;
-    }
+    } else if (req.query.searchQuery) {
+      console.log(req.query.searchQuery);
 
-    if (req.query.profile) {
+      payload = posts.filter(function(post) {
+        if (post.body.toLowerCase().indexOf(req.query.searchQuery.toLowerCase()) !== -1) {
+          return true
+        }
+      });
+
+    } else if (req.query.profile) {
       payload = posts.filter(function(post) {
         return post.user === parseInt(req.query.userId);
       });
     }
 
+    console.log(payload);
     res.send({posts: payload});
   });
 

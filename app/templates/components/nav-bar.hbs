@@ -11,8 +11,12 @@
     <img class="relative-center-xy" src="img/telegram-logo-small.png"/>
   </div>
 
+
+
+
   <div class="third">
     <div class="user relative-center-y">
+      {{input placeholder='Search' value=searchQuery action='search' on='enter'}}
       {{#link-to 'user' session.user}}
         <a class="avatar link"><img src="img/avatar-turquoise.png"/></a>
         <a class="name dark-gray-link">{{session.user.name}}</a>
