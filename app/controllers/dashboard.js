@@ -6,14 +6,21 @@ export default Ember.ArrayController.extend({
   sortAscending: false,
   init: function() {
     this._super();
-    // debugger;
-    // this.set('currentSkip', this.get('model.length'));
-    // this.set('skipLimit', this.store.metadataFor('post'));
+    this.set('skipLimit', this.store.metadataFor('post').skipLimit);
   },
 
   hasMore: function() {
-    return this.get('skipLimit') > this.get('currentSkip');
-  }.property('currentSkip'),
+    return this.get('skipLimit') > this.get('model.length');
+  }.property('model'),
+
+  fetchMoreItems: function() {
+    return this.store.find('post', {
+      dashboard: true,
+      limit: 2,
+      skip: this.get('model.length')
+    })
+  },
+
 
   actions: {
     whatever: function() {
@@ -23,18 +30,6 @@ export default Ember.ArrayController.extend({
     fetchMore: function(callback) {
       var promise = this.fetchMoreItems();
       callback(promise);
-    },
-
-    fetchMoreItems: function() {
-      var self = this;
-      debugger;
-      return this.store.find('post', {
-        dashboard: true,
-        limit: 2,
-        skip: self.get('currentSkip')
-      }).then(function() {
-        self.incrementProperty('currentSkip', 2);
-      });
     },
 
     publish: function() {

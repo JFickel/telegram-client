@@ -16,21 +16,14 @@ module.exports = function(app) {
   ]
 
   postsRouter.get('/', function(req, res) {
-    var skip = 5;
-    console.log(req.query);
     if (req.query.dashboard) {
       if (!req.query.skip) {
         payload = posts.slice(0, 5);
       } else if (req.query.skip) {
-        console.log("HIT")
-        payload = posts.slice(skip, skip + 2);
-        skip += 2;
+        payload = posts.slice(req.query.skip, req.query.skip + 2);
       }
     } else if (req.query.hasOwnProperty("searchQuery")) {
       payload = posts.filter(function(post) {
-        // console.log(req.query.searchQuery.toLowerCase());
-        // console.log(post.body.toLowerCase());
-        // console.log(post.body.toLowerCase().indexOf(req.query.searchQuery.toLowerCase()));
 
         if (post.body.toLowerCase().indexOf(req.query.searchQuery.toLowerCase()) !== -1) {
           return true
