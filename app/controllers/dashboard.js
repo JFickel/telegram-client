@@ -4,8 +4,39 @@ export default Ember.ArrayController.extend({
   message: null,
   sortProperties: ['createdAt'],
   sortAscending: false,
+  init: function() {
+    this._super();
+    // debugger;
+    // this.set('currentSkip', this.get('model.length'));
+    // this.set('skipLimit', this.store.metadataFor('post'));
+  },
+
+  hasMore: function() {
+    return this.get('skipLimit') > this.get('currentSkip');
+  }.property('currentSkip'),
 
   actions: {
+    whatever: function() {
+      debugger;
+    },
+
+    fetchMore: function(callback) {
+      var promise = this.fetchMoreItems();
+      callback(promise);
+    },
+
+    fetchMoreItems: function() {
+      var self = this;
+      debugger;
+      return this.store.find('post', {
+        dashboard: true,
+        limit: 2,
+        skip: self.get('currentSkip')
+      }).then(function() {
+        self.incrementProperty('currentSkip', 2);
+      });
+    },
+
     publish: function() {
       var post = this.store.createRecord('post', {
         body: this.get('message'),

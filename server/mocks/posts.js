@@ -7,13 +7,25 @@ module.exports = function(app) {
     { id: 2, body: 'LOL! RT @whatever OH: smh omg #hashtag', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 2 },
     { id: 3, body: '<sarcastic comment>', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 3 },
     { id: 4, body: 'Check out this link: http://google.com', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 4 },
-    { id: 5, body: 'This is a demo post for the newly created user.', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 420}
+    { id: 5, body: 'This is a demo post for the newly created user.', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 420},
+    { id: 6, body: 'tweet id 6', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 1},
+    { id: 7, body: 'tweet id 7', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 2},
+    { id: 8, body: 'tweet id 8', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 3},
+    { id: 9, body: 'tweet id 9', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 4},
+    { id: 10, body: 'tweet id 10', createdAt: 'Tue Feb 03 2015 09:14:15 GMT-0600 (CST)', user: 1}
   ]
 
   postsRouter.get('/', function(req, res) {
-    console.log(req.query.searchQuery);
+    var skip = 5;
+    console.log(req.query);
     if (req.query.dashboard) {
-      payload = posts;
+      if (!req.query.skip) {
+        payload = posts.slice(0, 5);
+      } else if (req.query.skip) {
+        console.log("HIT")
+        payload = posts.slice(skip, skip + 2);
+        skip += 2;
+      }
     } else if (req.query.hasOwnProperty("searchQuery")) {
       payload = posts.filter(function(post) {
         // console.log(req.query.searchQuery.toLowerCase());
@@ -32,12 +44,17 @@ module.exports = function(app) {
     }
 
     console.log(payload);
-    res.send({posts: payload});
+    res.send({
+      meta: {
+        skipLimit: posts.length
+      },
+      posts: payload
+    });
   });
 
   postsRouter.post('/', function(req, res) {
     var post = req.body.post,
-        idCounter = 5;
+        idCounter = 10;
 
     post.id = ++idCounter;
     posts.push(req.body.post);
