@@ -1,12 +1,4 @@
 <h2>Search Results for "{{searchQuery}}":</h2>
 
 
-{{#if this}}
-  {{#each result in this}}
-    {{post-block post=result}}
-  {{/each}}
-{{else}}
-  <div class="no-results">
-    No results.
-  </div>
-{{/if}}
+{{outlet}}

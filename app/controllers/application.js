@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: ['search'],
+  searchParam: Ember.computed.alias('controllers.search.searchQuery'),
+  searchQuery: '',
+  searchQueryBinding: Ember.Binding.oneWay("searchParam"),
+
   actions: {
     logout: function() {
       var controller = this;
@@ -15,7 +20,7 @@ export default Ember.Controller.extend({
     },
 
     search: function(searchQuery) {
-      this.transitionToRoute('search', { queryParams: { searchQuery: searchQuery }});
+      this.transitionToRoute('search.results', { queryParams: { searchQuery: searchQuery }});
     }
   }
 });

@@ -1,0 +1,9 @@
+{{#if model}}
+  {{#each result in this}}
+    {{post-block post=result}}
+  {{/each}}
+{{else}}
+  <div class="no-results">
+    No results.
+  </div>
+{{/if}}
