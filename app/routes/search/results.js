@@ -8,7 +8,6 @@ export default Ember.Route.extend({
   },
 
   model: function(params) {
-    this.controllerFor('search').set('searchQuery', params.searchQuery);
     var self = this;
     return new Promise(function(resolve) {
       setTimeout(function() {
@@ -17,10 +16,5 @@ export default Ember.Route.extend({
         });
       }, 2000)
     })
-  },
-
-  deactivate: function() {
-    this.controllerFor('application').set('searchQuery', '');
-    this.controllerFor('search').set('searchQuery', '');
   }
 });

@@ -18,17 +18,18 @@ module.exports = function(app) {
   app.use(morgan('dev'));
   app.use(bodyParser.json());
 
-  mocks.forEach(function(route) { route(app); });
-  proxies.forEach(function(route) { route(app); });
-
   // Delay response to simulate network lag.
   app.use(function(req, res, next) {
     var delay = 0;
+
     if (req.url.indexOf("/api") === 0) {
-      delay = 3000;
+      delay = 1200;
     }
     setTimeout(function() {
       next();
     }, delay);
   });
+
+  mocks.forEach(function(route) { route(app); });
+  proxies.forEach(function(route) { route(app); });
 };

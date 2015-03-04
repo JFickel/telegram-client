@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   message: null,
   sortProperties: ['createdAt'],
-  sortAscending: false,
+  sortAscending: true,
   init: function() {
     this._super();
     this.set('skipLimit', this.store.metadataFor('post').skipLimit);
