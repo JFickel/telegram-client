@@ -22,7 +22,7 @@ module.exports = function(app, options) {
     setTimeout(function() {
       conn.write(compose('newPost', {
         post: {
-          id: 20,
+          id: 25,
           body: 'hello from the sockjs server!',
           createdAt: 'Tue Feb 25 2015 09:14:21 GMT-0600 (CST)',
           user: 2

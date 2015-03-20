@@ -3,6 +3,6 @@ import Authenticated from 'telegram-client/mixins/authenticated';
 
 export default Ember.Route.extend(Authenticated, {
   deactivate: function() {
-    this.controllerFor('application').set('searchQuery', '');
+    this.controllerFor('search/results').set('searchQuery', '');
   }
 });

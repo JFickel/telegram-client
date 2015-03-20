@@ -4,13 +4,9 @@ export default Ember.ArrayController.extend({
   message: null,
   sortProperties: ['createdAt'],
   sortAscending: true,
-  init: function() {
-    this._super();
-    this.set('skipLimit', this.store.metadataFor('post').skipLimit);
-  },
 
   hasMore: function() {
-    return this.get('skipLimit') > this.get('model.length');
+    return this.store.metadataFor('post').skipLimit > this.get('model.length');
   }.property('model'),
 
   fetchMoreItems: function() {
