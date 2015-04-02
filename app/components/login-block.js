@@ -16,6 +16,11 @@ export default Ember.Component.extend(EmberValidations.Mixin,{
       } else {
         this.set('displayErrors', true);
       }
+    },
+
+    githubLogin: function() {
+      this.sendAction('githubLogin');
+      // console.log("HI :D");
     }
   },
 

@@ -17,6 +17,14 @@ export default Ember.Controller.extend({
       });
     },
 
+    githubLogin: function() {
+      this.get('toriiSession').open('github-oauth2').then(function() {
+        alert("SUCCESS :DDDD");
+      }, function() {
+        console.log("FAIL :c");
+      });
+    },
+
     signup: function(signUpData) {
       var user = this.store.createRecord('user', signUpData);
 

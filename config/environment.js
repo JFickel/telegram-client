@@ -16,6 +16,20 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    //"https://github.com/login/oauth/authorize?
+    // response_type=code&client_id=4beb7…ers%2Fauth%2Fgithub%2Fcallback&state=STATE&scope=user%3Aemail%2Cread%3Aorg"
+
+    torii: {
+      sessionServiceName: 'toriiSession',
+      providers: {
+        'github-oauth2': {
+          clientId: '5563d3a13c4c076cef3a',
+          redirectUri: 'http://localhost:4200',
+          scope: 'user:email,read:org'
+        }
+      }
     }
   };
 
@@ -27,7 +41,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.contentSecurityPolicy = {
-      'connect-src': "'self' ws://localhost:4200",
+      'connect-src': "'self' ws://localhost:4200 http://localhost:3000",
       'style-src': "'self' 'unsafe-inline'"
     }
   }
